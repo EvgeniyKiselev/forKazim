@@ -24,7 +24,7 @@ public abstract class BasePage {
     }
 
     //    метод клика по элементу
-    public void clickList(By by) {
+    public void clickElement(By by) {
         scrollToElement(by);
         webDriver.findElement(by).click();
     }

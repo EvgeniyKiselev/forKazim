@@ -11,11 +11,13 @@ public class DownListPage extends BasePage {
     }
 
     private String getQuestion(int num) {
-        return "accordion__heading-" + String.valueOf(num);
+        return "accordion__heading-" + num;
     }
 
-    private String getAnswer(int num) {
-        return "//div[./div[@id='" + getQuestion(num) + "']]//following-sibling::div/p";
+
+    protected By getAnswer(By by) {
+        return By.xpath("//div[./div[@id='" + by.toString().replace("By.id: ", "")
+                + "']]//following-sibling::div/p");
     }
 
 
@@ -29,16 +31,4 @@ public class DownListPage extends BasePage {
     protected By chargerQuestion = By.id(getQuestion(5));
     protected By cancellationQuestion = By.id(getQuestion(6));
     protected By MkadQuestion = By.id(getQuestion(7));
-
-    //    локаторы ответа стоимости
-    protected By howMuchCostAnswer = By.xpath(getAnswer(0));
-
-    protected By severalScooterAnswer = By.xpath(getAnswer(1));
-    protected By rentTimeAnswer = By.xpath(getAnswer(2));
-    protected By todayOrderAnswer = By.xpath(getAnswer(3));
-    protected By extendReturnAnswer = By.xpath(getAnswer(4));
-    protected By chargerAnswer = By.xpath(getAnswer(5));
-    protected By cancellationAnswer = By.xpath(getAnswer(6));
-    protected By MkadAnswer = By.xpath(getAnswer(7));
-
 }
