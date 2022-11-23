@@ -35,7 +35,7 @@ public class DownListPageTest extends BasePageTest {
 
     @Test
     public void scooterHelpAnswersTest() {
-        DownListPage downListPage = new DownListPage(webDriver);
+        DownListPage downListPage = new DownListPage(driver);
         String[] textsToCheck = new String[]{
                 howMuchCostAnswerText,
                 severalscooterAnswerText,
@@ -56,8 +56,9 @@ public class DownListPageTest extends BasePageTest {
                 downListPage.MkadQuestion};
         for (int i = 0; i < textsToCheck.length; i++) {
             downListPage.clickElement(elementsToCheck[i]);
+            downListPage.waitForElement(downListPage.getAnswer(elementsToCheck[i]));
             Assert.assertEquals("Текст в поле не верный", textsToCheck[i],
-                    webDriver.findElement(downListPage.getAnswer(elementsToCheck[i])).getText());
+                    driver.findElement(downListPage.getAnswer(elementsToCheck[i])).getText());
         }
     }
 

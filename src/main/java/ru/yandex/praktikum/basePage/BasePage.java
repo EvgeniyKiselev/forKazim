@@ -35,4 +35,9 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         return webDriver.findElement(by).getText();
     }
+
+    public void waitForElement(By by) {
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
 }

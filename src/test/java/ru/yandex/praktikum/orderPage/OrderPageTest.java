@@ -1,66 +1,52 @@
 package ru.yandex.praktikum.orderPage;
 
+import junitparams.Parameters;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
+import org.junit.runner.RunWith;
 import ru.yandex.praktikum.basePageTest.BasePageTest;
+import junitparams.JUnitParamsRunner;
+import ru.yandex.praktikum.data.Client;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class OrderPageTest extends BasePageTest {
 
-    // Тестовые данные  1
-    protected String ivanName = "Иван";
-    protected String ivanLastName = "Иванов";
-    protected String ivanAddress = "г.Москва, Севанская 8, кв 36";
-    protected String ivanPhone = "81233455678";
-    protected String ivanComment = "Комментарий для курьера";
-    //Тестовые данные 2
-    protected String victorName = "Виктор";
-    protected String victorLastName = "Викторов";
-    protected String victorAddress = "г.Москва, Кутузовский 10, кв 36";
-    protected String victorPhone = "812000765328";
-    protected String victorComment = "Без комментариев";
+    private Client ivan = new Client("Иван", "Иванов", "г.Москва, Севанская 8, кв 36",
+            "81233455678", "Комментарий для курьера");
 
-    // Тест для Chrome клик через по верхней кнопке заказа
-    @ParameterizedTest
-    @ValueSource()
-    public void checkRentOrderChromeOfClickTopButton(By by) {
-        OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.clickOrderButton(by);
-        orderPage.inputName(ivanName);
-        orderPage.inputLastName(ivanLastName);
-        orderPage.inputAddress(ivanAddress);
-        orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(ivanPhone);
-        orderPage.clickButtonFurther();
-        orderPage.enterDate();
-        orderPage.dateInput();
-        orderPage.blackColorChoice();
-        orderPage.inputComment(ivanComment);
-        orderPage.clickOnOrderButton();
-        orderPage.clickBottomYes();
-        String expected = "Посмотреть статус";
-        String actual = orderPage.getTextFromButtonViewStatus();
-        assertEquals("Ошибка, заказан не оформлен", expected, actual);
+    private Client victor = new Client("Виктор", "Викторов", "г.Москва, Кутузовский 10, кв 36",
+            "812000765328", "Без комментариев");
+
+    private  final Object[] getTestData() {
+        return new Object[] {
+                new Object[] {"top", ivan},
+                new Object[] {"bottom", victor}
+        };
     }
 
-    //   Тест для FireFox клик по верхней кнопке заказа
     @Test
-    public void checkRentOrderFireFoxClickTopButton() {
-        OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.clickOrderButtonTop();
-        orderPage.inputName(victorName);
-        orderPage.inputLastName(victorLastName);
-        orderPage.inputAddress(victorAddress);
+    @Parameters(method = "getTestData")
+    public void rentScooterTest(String buttonPosition, Client client) {
+        OrderPage orderPage = new OrderPage(driver);
+        switch (buttonPosition) {
+            case ("top"):
+                orderPage.clickOrderButtonTop();
+            case ("bottom"):
+                orderPage.scrollToElement(orderPage.bottomOrderButton);
+                orderPage.clickOrderButtonBottom();
+        }
+        orderPage.inputName(client.getName());
+        orderPage.inputLastName(client.getLastName());
+        orderPage.inputAddress(client.getAddress());
         orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(victorPhone);
+        orderPage.enterPhone(client.getPhone());
         orderPage.clickButtonFurther();
         orderPage.enterDate();
         orderPage.dateInput();
         orderPage.blackColorChoice();
-        orderPage.inputComment(victorComment);
+        orderPage.inputComment(client.getComment());
         orderPage.clickOnOrderButton();
         orderPage.clickBottomYes();
         String expected = "Посмотреть статус";
@@ -68,49 +54,4 @@ public class OrderPageTest extends BasePageTest {
         assertEquals("Ошибка, заказан не оформлен", expected, actual);
     }
 
-    //     Тест для Chrome клик через по нижней кнопке заказа
-    @Test
-    public void checkRentOrderChromeClickBottomButton() {
-        OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.scrollToElement(orderPage.bottomOrderButton);
-        orderPage.clickOrderButtonBottom();
-        orderPage.inputName(ivanName);
-        orderPage.inputLastName(ivanLastName);
-        orderPage.inputAddress(ivanAddress);
-        orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(ivanPhone);
-        orderPage.clickButtonFurther();
-        orderPage.enterDate();
-        orderPage.dateInput();
-        orderPage.blackColorChoice();
-        orderPage.inputComment(ivanComment);
-        orderPage.clickOnOrderButton();
-        orderPage.clickBottomYes();
-        String expected = "Посмотреть статус";
-        String actual = orderPage.getTextFromButtonViewStatus();
-        assertEquals("Ошибка, заказан не оформлен", expected, actual);
-    }
-
-    //    Тест для FireFox  клик через по нижней кнопке заказа
-    @Test
-    public void checkRentOrderFireFoxClickBottomButton() {
-        OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.scrollToElement(orderPage.bottomOrderButton);
-        orderPage.clickOrderButtonBottom();
-        orderPage.inputName(victorName);
-        orderPage.inputLastName(victorLastName);
-        orderPage.inputAddress(victorAddress);
-        orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(victorPhone);
-        orderPage.clickButtonFurther();
-        orderPage.enterDate();
-        orderPage.dateInput();
-        orderPage.blackColorChoice();
-        orderPage.inputComment(victorComment);
-        orderPage.clickOnOrderButton();
-        orderPage.clickBottomYes();
-        String expected = "Посмотреть статус";
-        String actual = orderPage.getTextFromButtonViewStatus();
-        assertEquals("Ошибка, заказан не оформлен", expected, actual);
-    }
 }
