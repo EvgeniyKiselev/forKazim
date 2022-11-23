@@ -90,10 +90,10 @@ public class OrderPage extends BasePage {
     }
 
     //    Метод клика по нижней кнопке заказа
-    public void clickOrderButtonBottom() {
+    public void clickOrderButton(By by) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(bottomOrderButton));
-        webDriver.findElement(bottomOrderButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        webDriver.findElement(by).click();
     }
 
     //    Метод клика по кнопке Да

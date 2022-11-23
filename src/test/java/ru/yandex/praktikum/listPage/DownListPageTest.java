@@ -34,7 +34,7 @@ public class DownListPageTest extends BasePageTest {
 
 
     @Test
-    public void checkPanel1() {
+    public void scooterHelpAnswersTest() {
         DownListPage downListPage = new DownListPage(webDriver);
         String[] textsToCheck = new String[]{
                 howMuchCostAnswerText,

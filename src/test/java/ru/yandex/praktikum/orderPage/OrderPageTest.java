@@ -1,6 +1,9 @@
 package ru.yandex.praktikum.orderPage;
 
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.By;
 import ru.yandex.praktikum.basePageTest.BasePageTest;
 
 import static org.junit.Assert.assertEquals;
@@ -8,33 +11,34 @@ import static org.junit.Assert.assertEquals;
 public class OrderPageTest extends BasePageTest {
 
     // Тестовые данные  1
-    protected String nameTest1 = "Иван";
-    protected String lastNameTest1 = "Иванов";
-    protected String addressTest1 = "г.Москва, Севанская 8, кв 36";
-    protected String telTest1 = "81233455678";
-    protected String commentTest1 = "Комментарий для курьера";
+    protected String ivanName = "Иван";
+    protected String ivanLastName = "Иванов";
+    protected String ivanAddress = "г.Москва, Севанская 8, кв 36";
+    protected String ivanPhone = "81233455678";
+    protected String ivanComment = "Комментарий для курьера";
     //Тестовые данные 2
-    protected String nameTest2 = "Виктор";
-    protected String lastNameTest2 = "Викторов";
-    protected String addressTest2 = "г.Москва, Кутузовский 10, кв 36";
-    protected String telTest2 = "812000765328";
-    protected String commentTest2 = "Без комментариев";
+    protected String victorName = "Виктор";
+    protected String victorLastName = "Викторов";
+    protected String victorAddress = "г.Москва, Кутузовский 10, кв 36";
+    protected String victorPhone = "812000765328";
+    protected String victorComment = "Без комментариев";
 
     // Тест для Chrome клик через по верхней кнопке заказа
-    @Test
-    public void checkRentOrderChromeOfClickTopButton() {
+    @ParameterizedTest
+    @ValueSource()
+    public void checkRentOrderChromeOfClickTopButton(By by) {
         OrderPage orderPage = new OrderPage(webDriver);
-        orderPage.clickOrderButtonTop();
-        orderPage.inputName(nameTest1);
-        orderPage.inputLastName(lastNameTest1);
-        orderPage.inputAddress(addressTest1);
+        orderPage.clickOrderButton(by);
+        orderPage.inputName(ivanName);
+        orderPage.inputLastName(ivanLastName);
+        orderPage.inputAddress(ivanAddress);
         orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(telTest1);
+        orderPage.enterPhone(ivanPhone);
         orderPage.clickButtonFurther();
         orderPage.enterDate();
         orderPage.dateInput();
         orderPage.blackColorChoice();
-        orderPage.inputComment(commentTest1);
+        orderPage.inputComment(ivanComment);
         orderPage.clickOnOrderButton();
         orderPage.clickBottomYes();
         String expected = "Посмотреть статус";
@@ -47,16 +51,16 @@ public class OrderPageTest extends BasePageTest {
     public void checkRentOrderFireFoxClickTopButton() {
         OrderPage orderPage = new OrderPage(webDriver);
         orderPage.clickOrderButtonTop();
-        orderPage.inputName(nameTest2);
-        orderPage.inputLastName(lastNameTest2);
-        orderPage.inputAddress(addressTest2);
+        orderPage.inputName(victorName);
+        orderPage.inputLastName(victorLastName);
+        orderPage.inputAddress(victorAddress);
         orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(telTest2);
+        orderPage.enterPhone(victorPhone);
         orderPage.clickButtonFurther();
         orderPage.enterDate();
         orderPage.dateInput();
         orderPage.blackColorChoice();
-        orderPage.inputComment(commentTest2);
+        orderPage.inputComment(victorComment);
         orderPage.clickOnOrderButton();
         orderPage.clickBottomYes();
         String expected = "Посмотреть статус";
@@ -70,16 +74,16 @@ public class OrderPageTest extends BasePageTest {
         OrderPage orderPage = new OrderPage(webDriver);
         orderPage.scrollToElement(orderPage.bottomOrderButton);
         orderPage.clickOrderButtonBottom();
-        orderPage.inputName(nameTest1);
-        orderPage.inputLastName(lastNameTest1);
-        orderPage.inputAddress(addressTest1);
+        orderPage.inputName(ivanName);
+        orderPage.inputLastName(ivanLastName);
+        orderPage.inputAddress(ivanAddress);
         orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(telTest1);
+        orderPage.enterPhone(ivanPhone);
         orderPage.clickButtonFurther();
         orderPage.enterDate();
         orderPage.dateInput();
         orderPage.blackColorChoice();
-        orderPage.inputComment(commentTest1);
+        orderPage.inputComment(ivanComment);
         orderPage.clickOnOrderButton();
         orderPage.clickBottomYes();
         String expected = "Посмотреть статус";
@@ -93,16 +97,16 @@ public class OrderPageTest extends BasePageTest {
         OrderPage orderPage = new OrderPage(webDriver);
         orderPage.scrollToElement(orderPage.bottomOrderButton);
         orderPage.clickOrderButtonBottom();
-        orderPage.inputName(nameTest2);
-        orderPage.inputLastName(lastNameTest2);
-        orderPage.inputAddress(addressTest2);
+        orderPage.inputName(victorName);
+        orderPage.inputLastName(victorLastName);
+        orderPage.inputAddress(victorAddress);
         orderPage.choiceOfMetroStation();
-        orderPage.enterPhone(telTest2);
+        orderPage.enterPhone(victorPhone);
         orderPage.clickButtonFurther();
         orderPage.enterDate();
         orderPage.dateInput();
         orderPage.blackColorChoice();
-        orderPage.inputComment(commentTest2);
+        orderPage.inputComment(victorComment);
         orderPage.clickOnOrderButton();
         orderPage.clickBottomYes();
         String expected = "Посмотреть статус";
