@@ -2,9 +2,7 @@ package ru.yandex.praktikum.basePageTest;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,7 +21,7 @@ public abstract class BasePageTest {
     protected final String URL = "https://qa-scooter.praktikum-services.ru/";
 
     public static WebDriver initDriver() {
-        if (properties.getProperties("browser").equals("firefox")){
+        if (properties.getProperties("browser").equals("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver(firefoxOptions);

@@ -1,11 +1,10 @@
 package ru.yandex.praktikum.orderPage;
 
+import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import ru.yandex.praktikum.basePageTest.BasePageTest;
-import junitparams.JUnitParamsRunner;
 import ru.yandex.praktikum.data.Client;
 
 import static org.junit.Assert.assertEquals;
@@ -19,10 +18,10 @@ public class OrderPageTest extends BasePageTest {
     private Client victor = new Client("Виктор", "Викторов", "г.Москва, Кутузовский 10, кв 36",
             "812000765328", "Без комментариев");
 
-    private  final Object[] getTestData() {
-        return new Object[] {
-                new Object[] {"top", ivan},
-                new Object[] {"bottom", victor}
+    private final Object[] getTestData() {
+        return new Object[]{
+                new Object[]{"top", ivan},
+                new Object[]{"bottom", victor}
         };
     }
 
