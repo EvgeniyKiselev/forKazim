@@ -38,6 +38,6 @@ public abstract class BasePage {
 
     public void waitForElement(By by) {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 }

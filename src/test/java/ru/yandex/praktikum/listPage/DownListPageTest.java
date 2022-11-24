@@ -57,8 +57,8 @@ public class DownListPageTest extends BasePageTest {
         for (int i = 0; i < textsToCheck.length; i++) {
             downListPage.clickElement(elementsToCheck[i]);
             downListPage.waitForElement(downListPage.getAnswer(elementsToCheck[i]));
-            Assert.assertEquals("Текст в поле не верный", textsToCheck[i],
-                    driver.findElement(downListPage.getAnswer(elementsToCheck[i])).getText());
+            Assert.assertEquals("Текст в поле " + elementsToCheck[i] + " не соответствует " + textsToCheck[i],
+                    textsToCheck[i], driver.findElement(downListPage.getAnswer(elementsToCheck[i])).getText());
         }
     }
 
